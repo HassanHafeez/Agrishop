@@ -1,3 +1,6 @@
+/* src/index.css or src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400&family=Playfair+Display:ital@1&display=swap');
+
 .App {
   text-align: center;
 }
