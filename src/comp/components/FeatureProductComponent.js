@@ -116,7 +116,7 @@ function FeatureProductComponent() {
                   {product.description}
                 </p>
               </div>
-              <div className="flex justify-between items-center mt-auto">
+              {/* <div className="flex justify-between items-center mt-auto">
                 <button className="bg-green-500 text-white py-2 px-3 rounded-lg hover:bg-green-600 transition duration-200">Shop Now</button>
                 <button className="bg-gray-200 text-gray-700 py-2 px-3 rounded-lg hover:bg-gray-300 transition duration-200">Add to Cart</button>
                 <div className="relative group">
@@ -127,7 +127,7 @@ function FeatureProductComponent() {
                     Add to Wishlist
                   </span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         ))}

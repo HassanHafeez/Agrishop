@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { key: 2, label: 'Biding', href: '/Bidding' },
   { key: 2, label: 'About us', href: '/aboutus' },
   { key: 3, label: 'Services', href: '/services' },
-  { key: 3, label: 'Salesforce', href: '/TestingComp' },
+  // { key: 3, label: 'Salesforce', href: '/TestingComp' },
   
 ];
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
@@ -17,6 +17,7 @@ import TestingComp from './pages/TestingComp';
 
 
 const Main = () => {
+  const [cartItems, setCartItems] = useState([]); //Create global cart state here
   return (
     <Router>
       <NavBar />
@@ -27,9 +28,11 @@ const Main = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/services" element={<Services />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/product-page" element={<ProductPage />} />
-          <Route path="/product/:productId" element={<ProductDetail />} />
+          {/* <Route path="/cart" element={<Cart />} /> */}
+          <Route path="/product-page"  element={<ProductPage setCartItems={setCartItems} />} />
+          {/* <Route path="/product/:productId" element={<ProductDetail />} /> */}
+          <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
+         <Route path="/product/:productId" element={<ProductDetail setCartItems={setCartItems}/>} />
           <Route path="/Bidding" element={<Bidding />} />
           
           <Route path="/contactus" element={<ContactUs />} />
