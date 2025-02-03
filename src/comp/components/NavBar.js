@@ -1,24 +1,35 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../Public Asset/Logo1.png"; // Replace with your logo image path
-import { FaShoppingCart } from "react-icons/fa"; // Import the cart icon
+import logo from "../Public Asset/Logo1.png";
+import { FaShoppingCart, FaUser } from "react-icons/fa";
 
-// Define NAV_LINKS directly in Navbar.js
 const NAV_LINKS = [
   { key: 1, label: 'Home', href: '/' },
   { key: 4, label: 'Products', href: '/product-page' },
   { key: 2, label: 'Biding', href: '/Bidding' },
   { key: 2, label: 'About us', href: '/aboutus' },
   { key: 3, label: 'Services', href: '/services' },
-  // { key: 3, label: 'Salesforce', href: '/TestingComp' },
-  
 ];
 
-const Navbar = () => {
+const Navbar = ({ userName, handleLogout }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [signUpClicked, setSignUpClicked] = useState(false); // State for double-click
+
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+  const closeDropdown = () => {
+    setDropdownOpen(false);
+  };
+   const handleSignUpDoubleClick = () => {
+    setSignUpClicked(true);
   };
 
   return (
@@ -56,12 +67,44 @@ const Navbar = () => {
               >
                 <FaShoppingCart className="text-2xl" />
               </Link>
-              <Link
-                to="/signup"
-                className="px-4 py-2 text-white bg-green-700 hover:bg-green-800 rounded-full"
-              >
-                Sign Up
-              </Link>
+              {userName ? (
+                <div className="relative">
+                  <button
+                    type="button"
+                    className="px-4 py-2 text-white bg-green-700 hover:bg-green-800 rounded-full"
+                    onClick={toggleDropdown}
+                  >
+                    {userName}
+                  </button>
+
+                  {dropdownOpen && (
+                    <div className="absolute right-0 mt-2 py-2 w-32 bg-white rounded-md shadow-xl z-10">
+                      <button
+                        onClick={() => {
+                          handleLogout();
+                          closeDropdown();
+                        }}
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100 w-full text-left"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                  !signUpClicked ? (
+                   <Link
+                        to="/signup"
+                        className="px-4 py-2 text-white bg-green-700 hover:bg-green-800 rounded-full"
+                        onDoubleClick={handleSignUpDoubleClick}
+                    >
+                      Sign Up
+                    </Link>
+
+                  ) :
+                      <FaUser className="text-2xl cursor-pointer" />
+
+                 )}
             </div>
           </>
         )}
@@ -79,11 +122,16 @@ const Navbar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full bg-white border-r transform transition-transform w-64 z-40 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed top-0 left-0 h-full bg-white border-r transform transition-transform w-64 z-40 ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
         <div className="p-4 flex justify-between items-center">
-          <button className="text-gray-800 font-bold text-xl" onClick={toggleSidebar}>
-            &times;
+          <button
+            className="text-gray-800 font-bold text-xl"
+            onClick={toggleSidebar}
+          >
+            ×
           </button>
           <span className="font-bold text-xl">Menu</span>
         </div>
@@ -105,12 +153,46 @@ const Navbar = () => {
           >
             <FaShoppingCart className="text-2xl" />
           </Link>
-          <Link
-            to="/signup"
-            className="w-full px-4 py-2 text-white bg-green-700 hover:bg-green-800 rounded-full block mt-2"
-          >
-            Sign Up
-          </Link>
+
+          {userName ? (
+            <div className="relative">
+              <button
+                type="button"
+                className="w-full px-4 py-2 text-white bg-green-700 hover:bg-green-800 rounded-full block mt-2"
+                onClick={toggleDropdown}
+              >
+                {userName}
+              </button>
+
+              {dropdownOpen && (
+                <div className="absolute left-0 mt-2 py-2 w-32 bg-white rounded-md shadow-xl z-10">
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      closeDropdown();
+                    }}
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100 w-full text-left"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+               !signUpClicked ?
+                    (
+                      <Link
+                          to="/signup"
+                           className="w-full px-4 py-2 text-white bg-green-700 hover:bg-green-800 rounded-full block mt-2"
+                             onDoubleClick={handleSignUpDoubleClick}
+                        >
+                        Sign Up
+                      </Link>
+                   )
+                    : <FaUser className="text-2xl cursor-pointer block mt-2" />
+
+
+          )}
         </div>
       </div>
     </>

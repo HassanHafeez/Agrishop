@@ -14,6 +14,7 @@ import ProductDetail from './pages/ProductDetail';
 import ContactUs from './pages/ContactUs'; // Import ContactUs
 import Bidding from './pages/Bidding';
 import TestingComp from './pages/TestingComp';
+import Ctesting from './pages/ctesting';
 
 
 const Main = () => {
@@ -32,11 +33,12 @@ const Main = () => {
           <Route path="/product-page"  element={<ProductPage setCartItems={setCartItems} />} />
           {/* <Route path="/product/:productId" element={<ProductDetail />} /> */}
           <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
-         <Route path="/product/:productId" element={<ProductDetail setCartItems={setCartItems}/>} />
+          <Route path="/product/:productId" element={<ProductDetail setCartItems={setCartItems} />} />
           <Route path="/Bidding" element={<Bidding />} />
           
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/TestingComp" element={<TestingComp />} />
+          <Route path="/ctesting" element={<Ctesting/>} />
           
         </Routes>
       </div>
